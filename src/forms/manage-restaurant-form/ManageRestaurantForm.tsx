@@ -1,7 +1,7 @@
 import { Form } from "@/components/ui/form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
-import z from "zod";
+import * as z from "zod";
 import DetailsSection from "./DetailsSection";
 import { Separator } from "@/components/ui/separator";
 import CuisinesSection from "./CuisinesSection";
@@ -15,19 +15,19 @@ import { useEffect } from "react";
 const formSchema = z
   .object({
     restaurantName: z.string().min(1, "restaurant name is required"),
-    city: z.string().min(1, "City is required"),
-    country: z.string().min(1, "Country is required"),
-    deliveryPrice: z.string().min(0, "Delivery Price is required"),
-    estimatedDeliveryTime: z
-      .string()
-      .min(1, "Estimated Delivery Time is required"),
+    city: z.string().min(1, "city is required"),
+    country: z.string().min(1, "country is required"),
+    deliveryPrice: z.coerce.number().min(1, "delivery price is required"),
+    estimatedDeliveryTime: z.coerce
+      .number()
+      .min(1, "estimated delivery time is required"),
     cuisines: z.array(z.string()).nonempty({
       message: "please select at least one item",
     }),
     menuItems: z.array(
       z.object({
         name: z.string().min(1, "name is required"),
-        price: z.string().min(1, "price is required"),
+        price: z.coerce.number().min(1, "price is required"),
       })
     ),
     imageUrl: z.string().optional(),
