@@ -17,9 +17,9 @@ const formSchema = z
     restaurantName: z.string().min(1, "restaurant name is required"),
     city: z.string().min(1, "City is required"),
     country: z.string().min(1, "Country is required"),
-    deliveryPrice: z.number().min(0, "Delivery Price is required"),
+    deliveryPrice: z.string().min(0, "Delivery Price is required"),
     estimatedDeliveryTime: z
-      .number()
+      .string()
       .min(1, "Estimated Delivery Time is required"),
     cuisines: z.array(z.string()).nonempty({
       message: "please select at least one item",
@@ -27,7 +27,7 @@ const formSchema = z
     menuItems: z.array(
       z.object({
         name: z.string().min(1, "name is required"),
-        price: z.number().min(1, "price is required"),
+        price: z.string().min(1, "price is required"),
       })
     ),
     imageUrl: z.string().optional(),
