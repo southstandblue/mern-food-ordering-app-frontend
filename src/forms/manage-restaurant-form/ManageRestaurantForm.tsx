@@ -14,23 +14,12 @@ import { useEffect } from "react";
 
 const formSchema = z
   .object({
-    restaurantName: z.string({
-      required_error: "restaurant name is required",
-    }),
-    city: z.string({
-      required_error: "city is required",
-    }),
-    country: z.string({
-      required_error: "country is required",
-    }),
-    deliveryPrice: z.coerce.number({
-      required_error: "delivery price is required",
-      invalid_type_error: "must be a valid number",
-    }),
-    estimatedDeliveryTime: z.coerce.number({
-      required_error: "estimated delivery time is required",
-      invalid_type_error: "must be a valid number",
-    }),
+    restaurantName: z.string().min(1, "restaurant name is required"),
+    city: z.string().min(1, "City is required"),
+    country: z.string().min(1, "Country is required"),
+    deliveryPrice: z.coerce.number().min(0, "Delivery Price is required")
+    estimatedDeliveryTime: z.coerce.number().min(1,"Estimated Delivery Time is required")
+      
     cuisines: z.array(z.string()).nonempty({
       message: "please select at least one item",
     }),
